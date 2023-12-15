@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uso de Slots</title>
+</head>
+<body>
+
+  <script type="module">
+    class ContenedorComponent extends HTMLElement {
+      constructor() {
+        super();
+
+        this.attachShadow({ mode: 'open' });
+
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host {
+              display: block;
+              border: 1px solid #ccc;
+              margin: 20px;
+              padding: 10px;
+            }
+
+            header {
+              background-color: #e7bbe7;
+              padding: 10px;
+              border-bottom: 1px solid #ccc;
+              font-size: 1.2em;
+              font-weight: bold;
+              text-align: center;
+            }
+
+            section {
+              padding: 10px;
+              background-color: #a77fa8;
+              font-size: 1.2em;
+              font-weight: bold;
+            }
+          </style>
+          <div>
+            <header>
+              <slot name="encabezado">Encabezado predeterminado</slot>
+            </header>
+            <section>
+              <slot name="contenido">Contenido predeterminado</slot>
+            </section>
+          </div>
+        `;
+      }
+    }
+
+    customElements.define('contenedor-component', ContenedorComponent);
+  </script>
+
+  <contenedor-component>
+    <div slot="encabezado">Encabezado personalizado</div>
+    <p slot="contenido">Contenido personalizado</p>
+  </contenedor-component>
+
+  <script>
+      
+    var boton = document.createElement("button");
+    boton.innerHTML = "Regresar al inicio";
+    document.body.appendChild(boton);
+    boton.addEventListener("click", function(){
+      window.location.href = "index.html";
+    });
+    
+    boton.style.backgroundColor = "#4CAF50";
+    boton.style.border = "none";
+    boton.style.color = "white";
+    boton.style.padding = "10px 25px";
+    boton.style.marginTop = "20px";
+  </script>
+
+</body>
+</html>

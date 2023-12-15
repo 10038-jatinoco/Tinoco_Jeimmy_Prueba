@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saludo Component</title>
+</head>
+<body>
+
+  <script type="module">
+    class SaludoComponent extends HTMLElement {
+      constructor() {
+        super();
+
+        this.attachShadow({ mode: 'open' });
+
+        this.shadowRoot.innerHTML = `
+          <style>
+            /* Estilos encapsulados en el Shadow DOM */
+            :host {
+              display: block;
+              font-family: Arial, sans-serif;
+              text-align: center;
+              padding: 20px;
+              background-color: #fff2d1;
+              border: 1px solid #ccc;
+            }
+            .saludo{
+             font-size: 30px;
+             font-weight: bold;
+
+            }
+          </style>
+          <div class="saludo">
+            ¡Hola Mundo!
+          </div>
+        `;
+      }
+    }
+
+    customElements.define('saludo-component', SaludoComponent);
+  </script>
+
+  <saludo-component></saludo-component>
+
+  <script>
+      
+    var boton = document.createElement("button");
+    boton.innerHTML = "Regresar al inicio";
+    document.body.appendChild(boton);
+    boton.addEventListener("click", function(){
+      window.location.href = "index.html";
+    });
+    
+    boton.style.backgroundColor = "#4CAF50";
+    boton.style.border = "none";
+    boton.style.color = "white";
+    boton.style.padding = "10px 25px";
+    boton.style.marginTop = "20px";
+  </script>
+
+</body>
+</html>
